@@ -1,7 +1,17 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { trackEvent } from "./component/GoogleAnalytics";
 
 export default function Home() {
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // Track Form Submission
+    trackEvent("submit_form", "Contact", "Lead Generation Form");
+
+    alert("Form Submitted!");
+  };
   return (
     <div className="min-h-screen flex flex-col bg-zinc-50 dark:bg-black font-sans">
       <header className="w-full border-b border-black/[.06] dark:border-white/[.06]">
@@ -101,6 +111,24 @@ export default function Home() {
                 Try demo
               </a>
             </div>
+          </div>
+          <div className="p-10">
+            <form onSubmit={handleSubmit} className="space-y-4 max-w-sm">
+              <input
+                className="border p-2 w-full"
+                placeholder="Name"
+                required
+              />
+              <button
+                type="submit"
+                className="bg-black text-white px-6 py-2 rounded"
+                onClick={() =>
+                  trackEvent("click_button", "UX", "Submit Button Click")
+                }
+              >
+                Send Message
+              </button>
+            </form>
           </div>
         </section>
       </main>

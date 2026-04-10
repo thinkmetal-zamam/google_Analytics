@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect } from "react";
-import { pageView } from "../lib/ga";
 import { usePathname } from "next/navigation";
 
 export default function PageTracker() {
@@ -14,7 +13,6 @@ export default function PageTracker() {
     } catch {
       return;
     }
-    pageView(pathname);
   }, [pathname]);
 
   return null;
